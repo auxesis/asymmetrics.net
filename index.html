@@ -12,20 +12,24 @@ h2 {
 }
 h1 {
   font-size: 60px;
-  /*letter-spacing: 1px;
-  /*background-color: #F7EF6A;*/
 }
 h2 {
   color: #535353;
 }
 body { margin: 0; }
+
+.container svg {
+  height: 600px;
+}
 </style>
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400" rel="stylesheet">
 <!--
 <h1>asymmetrics</h1>
 <h2>Engineering. Digital. Strategy.</h2>
 -->
-<svg></svg>
+<div class="container">
+  <svg></svg>
+</div>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://d3js.org/d3-color.v1.min.js"></script>
 <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
@@ -41,14 +45,17 @@ var stack = d3.stack().keys(d3.range(n)).offset(d3.stackOffsetWiggle),
     layers = layers0.concat(layers1);
 
 var container = d3.select('body').node(),
+    //width = container.getBoundingClientRect().width,
+    //width = screen.width,
     width = container.getBoundingClientRect().width,
-    height = container.getBoundingClientRect().height * 4;
+    height = container.getBoundingClientRect().height;
 
 var svg = d3.select("svg")
     .attr("width", '100%')
     .attr("height", height)
-    .attr('viewBox','0 0 '+Math.min(width,height)+' '+Math.min(width,height))
-    .attr('preserveAspectRatio','xMinYMin meet');
+    .attr('viewBox',`0 0 ${Math.min(width,height)} ${Math.min(width,height)}`)
+    //.attr('viewBox',`0 0 ${width} ${height}`)
+    .attr('preserveAspectRatio','xMinYMin');
 
 var x = d3.scaleLinear()
     .domain([0, m - 1])
