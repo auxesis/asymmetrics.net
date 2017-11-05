@@ -5,17 +5,41 @@ title: asymmetrics.net
 <meta charset="utf-8">
 <title>asymmetrics.net</title>
 <style>
-h1 {
-  font-family: 'Roboto Condensed','Helvetica',sans-serif;
-  font-size: 60px;
+h1,
+h2 {
+  font-family: 'Roboto','Helvetica',sans-serif;
   text-align: center;
+}
+h1 {
+  font-size: 60px;
+  /*letter-spacing: 1px;
   /*background-color: #F7EF6A;*/
 }
+h2 {
+  color: #535353;
+}
 body { margin: 0; }
+
+.container {
+  position: relative;
+  text-align: center;
+}
+.container div.title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-shadow: 1px 1px 1px #fff;
+}
 </style>
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400" rel="stylesheet">
-<h1>asymmetrics.net</h1>
-<svg width="960" height="500"></svg>
+<div class="container">
+  <div class="title">
+    <h1>asymmetrics</h1>
+    <h2>Engineering. Digital. Strategy.</h2>
+  </div>
+  <svg width="960" height="500"></svg>
+</div>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://d3js.org/d3-color.v1.min.js"></script>
 <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
@@ -56,6 +80,7 @@ svg.selectAll("path")
   .data(layers0)
   .enter().append("path")
     .attr("d", area)
+    .attr("opacity", 0.75)
     .attr("fill", function() { return z(Math.random()); });
 
 function stackMax(layer) {
@@ -93,5 +118,6 @@ function bump(a, n) {
   }
 }
 
+transition();
 setInterval(function() { transition() }, 5000);
 </script>
