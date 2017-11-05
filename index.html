@@ -14,12 +14,17 @@ h1 {
   font-size: 60px;
 }
 h2 {
-  color: #535353;
+  color: #434343;
+}
+h1 span,
+h2 span {
+  background-color: white;
+  padding: 5px 15px;
 }
 body { margin: 0; }
 
 .container {
-  margin-top: 30px;
+  margin-top: 15px;
   position: relative;
   text-align: center;
 }
@@ -33,14 +38,13 @@ body { margin: 0; }
   top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
-  text-shadow: 1px 1px 1px #fff;
 }
 </style>
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400" rel="stylesheet">
 <div class="container">
   <div class="title">
-    <h1>asymmetrics</h1>
-    <h2>Engineering. Digital. Strategy.</h2>
+    <h1><span>asymmetrics</span></h1>
+    <h2><span>Engineering. Digital. Strategy.</span></h2>
   </div>
   <svg></svg>
 </div>
@@ -59,16 +63,13 @@ var stack = d3.stack().keys(d3.range(n)).offset(d3.stackOffsetWiggle),
     layers = layers0.concat(layers1);
 
 var container = d3.select('body').node(),
-    //width = container.getBoundingClientRect().width,
-    //width = screen.width,
-    width = container.getBoundingClientRect().width + 20,
+    width = screen.width + 20,
     height = container.getBoundingClientRect().height;
 
 var svg = d3.select("svg")
     .attr("width", '100%')
     .attr("height", height)
     .attr('viewBox',`0 0 ${Math.min(width,height)} ${Math.min(width,height)}`)
-    //.attr('viewBox',`0 0 ${width} ${height}`)
     .attr('preserveAspectRatio','xMinYMin');
 
 var x = d3.scaleLinear()
