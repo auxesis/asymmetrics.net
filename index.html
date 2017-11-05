@@ -80,9 +80,6 @@ var y = d3.scaleLinear()
     .domain([d3.min(layers, stackMin), d3.max(layers, stackMax)])
     .range([height, 0]);
 
-//var z = d3.interpolateMagma;
-//var z = d3.interpolateViridis;
-//var z = d3.interpolateGreys;
 var z = d3.interpolateRdGy;
 
 var area = d3.area()
