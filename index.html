@@ -19,44 +19,36 @@ h2 {
   color: #535353;
 }
 body { margin: 0; }
-
-.container {
-  position: relative;
-  text-align: center;
-}
-.container div.title {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-shadow: 1px 1px 1px #fff;
-}
 </style>
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400" rel="stylesheet">
-<div class="container">
-  <div class="title">
-    <h1>asymmetrics</h1>
-    <h2>Engineering. Digital. Strategy.</h2>
-  </div>
-  <svg width="960" height="500"></svg>
-</div>
+<!--
+<h1>asymmetrics</h1>
+<h2>Engineering. Digital. Strategy.</h2>
+-->
+<svg></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://d3js.org/d3-color.v1.min.js"></script>
 <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script>
-var n = 20, // number of layers
-    m = 200, // number of samples per layer
-    k = 10; // number of bumps per layer
+var n = 15, // number of layers
+    m = 300, // number of samples per layer
+    k = 15; // number of bumps per layer
 
 var stack = d3.stack().keys(d3.range(n)).offset(d3.stackOffsetWiggle),
     layers0 = stack(d3.transpose(d3.range(n).map(function() { return bumps(m, k); }))),
     layers1 = stack(d3.transpose(d3.range(n).map(function() { return bumps(m, k); }))),
     layers = layers0.concat(layers1);
 
-var svg = d3.select("svg"),
-    width = +svg.attr("width"),
-    height = +svg.attr("height");
+var container = d3.select('body').node(),
+    width = container.getBoundingClientRect().width,
+    height = container.getBoundingClientRect().height * 4;
+
+var svg = d3.select("svg")
+    .attr("width", '100%')
+    .attr("height", height)
+    .attr('viewBox','0 0 '+Math.min(width,height)+' '+Math.min(width,height))
+    .attr('preserveAspectRatio','xMinYMin meet');
 
 var x = d3.scaleLinear()
     .domain([0, m - 1])
