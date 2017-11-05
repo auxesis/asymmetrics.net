@@ -6,3 +6,4 @@ exclude:
   - vendor
   - README.md
   - LICENSE
+host: 0.0.0.0
