@@ -27,10 +27,7 @@ body { margin: 0; }
   margin-top: 15px;
   position: relative;
   text-align: center;
-}
-
-.container svg {
-  height: 750px;
+  height: 450px;
 }
 
 .container div.title {
@@ -63,8 +60,30 @@ var stack = d3.stack().keys(d3.range(n)).offset(d3.stackOffsetWiggle),
     layers = layers0.concat(layers1);
 
 var container = d3.select('body').node(),
-    width = screen.width + 20,
+    width = screen.width,
     height = container.getBoundingClientRect().height;
+
+console.log(width);
+
+function draw() {
+  var container = d3.select('.container').node(),
+      width = screen.width,
+      height = container.getBoundingClientRect().height;
+
+  console.log('width', width);
+  console.log('height', height);
+
+  var svg = d3.select("svg")
+      .attr("width", '100%')
+      .attr("height", height)
+      //.attr('viewBox',`0 0 ${height} ${width}`)
+      .attr('viewBox',`0 0 ${Math.min(width,height)} ${Math.min(width,height)}`)
+      .attr('preserveAspectRatio','xMinYMin');
+}
+
+window.addEventListener("resize", draw);
+
+draw()
 
 var svg = d3.select("svg")
     .attr("width", '100%')
