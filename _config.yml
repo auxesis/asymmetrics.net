@@ -1,7 +1,5 @@
 permalink: /:title/
 markdown: kramdown
-gems:
-  - jekyll-redirect-from
 exclude:
   - Gemfile
   - Gemfile.lock
