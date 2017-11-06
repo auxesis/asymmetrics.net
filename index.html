@@ -70,9 +70,6 @@ function draw() {
   var container = d3.select('.container').node(),
       height = container.getBoundingClientRect().height;
 
-  console.log('width', width());
-  console.log('height', height);
-
   var svg = d3.select("svg")
       .attr("width", '100%')
       .attr("height", height)
@@ -88,7 +85,7 @@ draw()
 var svg = d3.select("svg")
     .attr("width", '100%')
     .attr("height", height)
-    .attr('viewBox',`0 0 ${Math.max(width(),height)} ${Math.max(width(),height)}`)
+    .attr('viewBox',`0 0 ${Math.max(width(),height)} ${Math.min(width(),height)}`)
     .attr('preserveAspectRatio','xMinYMin');
 
 var x = d3.scaleLinear()
