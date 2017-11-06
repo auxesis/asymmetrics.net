@@ -67,7 +67,9 @@ var doc = {
     return this.container().getBoundingClientRect().height;
   },
   width: function() {
-    return screen.width
+    var sWidth = screen.width,
+        cWidth = this.container().getBoundingClientRect().width;
+    return sWidth > cWidth ? sWidth : cWidth
   },
   draw: function() {
     var width = Math.max(doc.width(),doc.height()),
