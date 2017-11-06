@@ -59,42 +59,40 @@ var stack = d3.stack().keys(d3.range(n)).offset(d3.stackOffsetWiggle),
     layers1 = stack(d3.transpose(d3.range(n).map(function() { return bumps(m, k); }))),
     layers = layers0.concat(layers1);
 
-function width() {
-  return screen.width
+var doc = {
+  container: function() {
+    return d3.select('.container').node();
+  },
+  height: function() {
+    return this.container().getBoundingClientRect().height;
+  },
+  width: function() {
+    return screen.width
+  }
 }
 
-var container = d3.select('body').node(),
-    height = container.getBoundingClientRect().height;
-
 function draw() {
-  var container = d3.select('.container').node(),
-      height = container.getBoundingClientRect().height;
+  var width = Math.max(doc.width(),doc.height()),
+      height = Math.min(doc.width(),doc.height());
 
-  var svg = d3.select("svg")
-      .attr("width", '100%')
-      .attr("height", height)
-      //.attr('viewBox',`0 0 ${height} ${width}`)
-      .attr('viewBox',`0 0 ${Math.max(width(),height)} ${Math.min(width(),height)}`)
-      .attr('preserveAspectRatio','xMinYMin');
+  return d3.select("svg")
+    .attr("width", '100%')
+    .attr("height", height)
+    .attr('viewBox',`0 0 ${width} ${height}`)
+    .attr('preserveAspectRatio','xMinYMin');
 }
 
 window.addEventListener("resize", draw);
 
-draw()
-
-var svg = d3.select("svg")
-    .attr("width", '100%')
-    .attr("height", height)
-    .attr('viewBox',`0 0 ${Math.max(width(),height)} ${Math.min(width(),height)}`)
-    .attr('preserveAspectRatio','xMinYMin');
+var svg = draw()
 
 var x = d3.scaleLinear()
     .domain([0, m - 1])
-    .range([0, width()]);
+    .range([0, doc.width()]);
 
 var y = d3.scaleLinear()
     .domain([d3.min(layers, stackMin), d3.max(layers, stackMax)])
-    .range([height, 0]);
+    .range([doc.height(), 0]);
 
 var z = d3.interpolateRdGy;
 
