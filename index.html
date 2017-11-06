@@ -3,11 +3,17 @@ title: asymmetrics.net
 ---
 <!DOCTYPE html>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>asymmetrics.net</title>
 <style>
+body {
+  margin: 0;
+  font-family: 'Roboto','Helvetica',sans-serif;
+  background-color: white;
+}
+
 h1,
 h2 {
-  font-family: 'Roboto','Helvetica',sans-serif;
   text-align: center;
 }
 h1 {
@@ -16,12 +22,19 @@ h1 {
 h2 {
   color: #434343;
 }
+
 h1 span,
 h2 span {
-  background-color: white;
+  background-color:rgba(255, 255, 255, 0.90);
   padding: 5px 15px;
+  line-height: 160%;
 }
-body { margin: 0; }
+
+@media print, screen and (max-width: 700px) {
+  h1 {
+    font-size: 45px;
+  }
+}
 
 .container {
   margin-top: 15px;
@@ -89,7 +102,7 @@ var svg = doc.draw()
 
 var x = d3.scaleLinear()
     .domain([0, m - 1])
-    .range([0, doc.width()]);
+    .range([0, doc.width() + 200]);
 
 var y = d3.scaleLinear()
     .domain([d3.min(layers, stackMin), d3.max(layers, stackMax)])
