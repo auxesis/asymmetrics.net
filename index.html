@@ -68,23 +68,22 @@ var doc = {
   },
   width: function() {
     return screen.width
+  },
+  draw: function() {
+    var width = Math.max(doc.width(),doc.height()),
+        height = Math.min(doc.width(),doc.height());
+
+    return d3.select("svg")
+      .attr("width", '100%')
+      .attr("height", height)
+      .attr('viewBox',`0 0 ${width} ${height}`)
+      .attr('preserveAspectRatio','xMinYMin');
   }
 }
 
-function draw() {
-  var width = Math.max(doc.width(),doc.height()),
-      height = Math.min(doc.width(),doc.height());
+window.addEventListener("resize", doc.draw);
 
-  return d3.select("svg")
-    .attr("width", '100%')
-    .attr("height", height)
-    .attr('viewBox',`0 0 ${width} ${height}`)
-    .attr('preserveAspectRatio','xMinYMin');
-}
-
-window.addEventListener("resize", draw);
-
-var svg = draw()
+var svg = doc.draw()
 
 var x = d3.scaleLinear()
     .domain([0, m - 1])
